@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="saveToLocalStorage(event)">
+        <label>Name</label>
+        <input type="text" name="username" id="name">
+        <label>Email</label>
+        <input type="email" name="email" id="email">
+        <label>Phone Number</label>
+        <input type="number" name="phonenumber" id="phone">
+        <button>Submit</button>
+    </form>
+    <ul id="listOfItems"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script type="text/javascript">
+        function saveToLocalStorage(event)
+        {
+            event.preventDefault();
+            const name = event.target.username.value;
+            const email = event.target.email.value;
+            const phonenumber = event.target.phonenumber.value;
+
+            const obj = {
+                name,
+                email,
+                phonenumber
+            }
+
+
+            axios.post("https://crudcrud.com/api/25fc99bb53154895964d075dccb579aa/appointmentData",obj).then((response) => {
+                console.log(response)
+            })
+            .catch((err) => {
+                document.body.innerHTML = document.body.innerHTML + "<h4>something went wrong</h4>"
+                console.log(err);
+            })
+            //localStorage.setItem(obj.email, JSON.stringify(obj));
+
+
+            //create li element
+            var itemList = document.getElementById('listOfItems');
+
+            //create list
+            var li = document.createElement('li');
+
+            //Add text in li
+            li.textContent = obj.name+"-"+obj.email+"-"+obj.phonenumber;
+
+            //append li to list
+            itemList.appendChild(li);
+
+            //document.getElementById('name').value = obj.name;
+        
+            //const name_seralized = JSON.stringify(name);
+            //localStorage.setItem('name', name_seralized);
+            //const name_deseralized = JSON.parse(localStorage.getItem('name'));
+            //localStorage.setItem('email', email);
+            //localStorage.setItem('phone', phonenumber);
+
+
+            //create delete button
+            var deleteBtn = document.createElement('button');
+
+            //create edit button
+            var editBtn = document.createElement('button');
+
+            //append text node
+            //deleteBtn.appendChild(document.createTextNode('delete'));
+            deleteBtn.textContent = 'delete';
+            editBtn.textContent  = 'edit';
+
+            //append button to li
+            li.appendChild(deleteBtn);
+            li.appendChild(editBtn);
+
+            //delete function
+            deleteBtn.addEventListener('click', ()=>{
+                itemList.removeChild(li);
+                localStorage.removeItem(obj.email);
+            })
+
+            //edit function
+            editBtn.addEventListener('click', ()=>{
+                
+                //var info = localStorage.getItem(obj.email);
+                //console.log(info);
+                document.getElementById('name').value = obj.name;
+                document.getElementById('email').value = obj.email;
+                document.getElementById('phone').value = obj.phonenumber;
+                
+                //remove list
+                itemList.removeChild(li);
+
+                //remove item from local storage
+                localStorage.removeItem(obj.email);
+            })
+        }
+    </script>
+</body>
+</html>
