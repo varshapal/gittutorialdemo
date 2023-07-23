@@ -31,76 +31,87 @@
                 email,
                 phonenumber
             }
+        
 
-
-            axios.post("https://crudcrud.com/api/25fc99bb53154895964d075dccb579aa/appointmentData",obj).then((response) => {
+            axios.post("https://crudcrud.com/api/1d3dfca327204c97bfc24883c52ca566/appointmentData",obj).then((response) => {
                 console.log(response)
             })
             .catch((err) => {
                 document.body.innerHTML = document.body.innerHTML + "<h4>something went wrong</h4>"
                 console.log(err);
             })
+        }
+            window.addEventListener("DOMContentLoaded", () => {
+                axios.get("https://crudcrud.com/api/1d3dfca327204c97bfc24883c52ca566/appointmentData")
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            })
+        
             //localStorage.setItem(obj.email, JSON.stringify(obj));
 
 
-            //create li element
-            var itemList = document.getElementById('listOfItems');
+        //     //create li element
+        //     var itemList = document.getElementById('listOfItems');
 
-            //create list
-            var li = document.createElement('li');
+        //     //create list
+        //     var li = document.createElement('li');
 
-            //Add text in li
-            li.textContent = obj.name+"-"+obj.email+"-"+obj.phonenumber;
+        //     //Add text in li
+        //     //li.textContent = obj.name+"-"+obj.email+"-"+obj.phonenumber;
 
-            //append li to list
-            itemList.appendChild(li);
+        //     //append li to list
+        //     itemList.appendChild(li);
 
-            //document.getElementById('name').value = obj.name;
+        //     //document.getElementById('name').value = obj.name;
         
-            //const name_seralized = JSON.stringify(name);
-            //localStorage.setItem('name', name_seralized);
-            //const name_deseralized = JSON.parse(localStorage.getItem('name'));
-            //localStorage.setItem('email', email);
-            //localStorage.setItem('phone', phonenumber);
+        //     //const name_seralized = JSON.stringify(name);
+        //     //localStorage.setItem('name', name_seralized);
+        //     //const name_deseralized = JSON.parse(localStorage.getItem('name'));
+        //     //localStorage.setItem('email', email);
+        //     //localStorage.setItem('phone', phonenumber);
 
 
-            //create delete button
-            var deleteBtn = document.createElement('button');
+        //     //create delete button
+        //     var deleteBtn = document.createElement('button');
 
-            //create edit button
-            var editBtn = document.createElement('button');
+        //     //create edit button
+        //     var editBtn = document.createElement('button');
 
-            //append text node
-            //deleteBtn.appendChild(document.createTextNode('delete'));
-            deleteBtn.textContent = 'delete';
-            editBtn.textContent  = 'edit';
+        //     //append text node
+        //     //deleteBtn.appendChild(document.createTextNode('delete'));
+        //     deleteBtn.textContent = 'delete';
+        //     editBtn.textContent  = 'edit';
 
-            //append button to li
-            li.appendChild(deleteBtn);
-            li.appendChild(editBtn);
+        //     //append button to li
+        //     li.appendChild(deleteBtn);
+        //     li.appendChild(editBtn);
 
-            //delete function
-            deleteBtn.addEventListener('click', ()=>{
-                itemList.removeChild(li);
-                localStorage.removeItem(obj.email);
-            })
+        //     //delete function
+        //     deleteBtn.addEventListener('click', ()=>{
+        //         itemList.removeChild(li);
+        //         localStorage.removeItem(obj.email);
+        //     })
 
-            //edit function
-            editBtn.addEventListener('click', ()=>{
+        //     //edit function
+        //     editBtn.addEventListener('click', ()=>{
                 
-                //var info = localStorage.getItem(obj.email);
-                //console.log(info);
-                document.getElementById('name').value = obj.name;
-                document.getElementById('email').value = obj.email;
-                document.getElementById('phone').value = obj.phonenumber;
+        //         //var info = localStorage.getItem(obj.email);
+        //         //console.log(info);
+        //         document.getElementById('name').value = obj.name;
+        //         document.getElementById('email').value = obj.email;
+        //         document.getElementById('phone').value = obj.phonenumber;
                 
-                //remove list
-                itemList.removeChild(li);
+        //         //remove list
+        //         itemList.removeChild(li);
 
-                //remove item from local storage
-                localStorage.removeItem(obj.email);
-            })
-        }
+        //         //remove item from local storage
+        //         //localStorage.removeItem(obj.email);
+        //     })
+        // //}
     </script>
 </body>
 </html>
